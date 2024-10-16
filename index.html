@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Hand Predictor</title>
+</head>
+<body>
+    <h1>Poker Hand Predictor</h1>
+    <form id="prediction-form">
+        <h3>Enter the Poker Hand:</h3>
+        <div>
+            <label for="S1">S1:</label>
+            <input type="number" name="S1" required>
+            <label for="C1">C1:</label>
+            <input type="number" name="C1" required>
+        </div>
+        <div>
+            <label for="S2">S2:</label>
+            <input type="number" name="S2" required>
+            <label for="C2">C2:</label>
+            <input type="number" name="C2" required>
+        </div>
+        <div>
+            <label for="S3">S3:</label>
+            <input type="number" name="S3" required>
+            <label for="C3">C3:</label>
+            <input type="number" name="C3" required>
+        </div>
+        <div>
+            <label for="S4">S4:</label>
+            <input type="number" name="S4" required>
+            <label for="C4">C4:</label>
+            <input type="number" name="C4" required>
+        </div>
+        <div>
+            <label for="S5">S5:</label>
+            <input type="number" name="S5" required>
+            <label for="C5">C5:</label>
+            <input type="number" name="C5" required>
+        </div>
+        <button type="submit">Predict</button>
+    </form>
+    <h3 id="result"></h3>
+    <script>
+        document.getElementById('prediction-form').onsubmit = async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData,
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = 'Predicted Class: ' + result.predicted_class;
+        };
+    </script>
+</body>
+</html>
